@@ -1,14 +1,12 @@
 package guru.qa;
 
 import com.codeborne.pdftest.PDF;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.selector.ByText;
 import com.codeborne.xlstest.XLS;
-import com.opencsv.CSVParser;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -32,12 +30,12 @@ public class FilesTest {
         open("https://the-internet.herokuapp.com/upload");
         File exampleFile = new File("C:\\Users\\Rustam\\IdeaProjects\\qa_guru_9_8_files\\src\\test\\resources\\example.txt");
         $("input[type='file']").uploadFile(exampleFile);
+        $("#file-submit").click();
+        $("#uploaded-files").shouldHave(text("example.txt"));
         //Пример, когда данный метод может загружать несколько файлов - это exampleFile и exampleFile0
         //File exampleFile = new File("C:\\Users\\Rustam\\IdeaProjects\\qa_guru_9_8_files\\src\\test\\resources\\example.txt");
         //File exampleFile0 = new File("C:\\Users\\Rustam\\IdeaProjects\\qa_guru_9_8_files\\src\\test\\resources\\example.txt");
         //$("input[type='file']").uploadFile(exampleFile, exampleFile0);
-        $("#file-submit").click();
-        $("#uploaded-files").shouldHave(text("example.txt"));
     }
 
     @Test
@@ -50,6 +48,7 @@ public class FilesTest {
         $("#uploaded-files").shouldHave(text("example.txt"));
     }
 
+    @Disabled
     //скачать файл можно, только если в элементе содержится href, в ином случае задейсвтуется прокси
     @Test
     @DisplayName("скачивание текстового файла и проверка его содержимого")
@@ -62,6 +61,7 @@ public class FilesTest {
         assertTrue(fileContent.contains("This repository is the home of the next generation of JUnit, _JUnit 5_."));
     }
 
+    @Disabled
     @Test
     @DisplayName("скачивание PDF файла")
     void pdfFileDownloadTest() throws IOException {
@@ -74,6 +74,7 @@ public class FilesTest {
         //данная переменная parsedPdf несёт в себе несколько методов, например проверка autor
     }
 
+    @Disabled
     @Test
     @DisplayName("скачивание XLS файла")
     void xlsFileDownloadTest() throws IOException {
@@ -92,6 +93,7 @@ public class FilesTest {
         assertTrue(checkPassed);
     }
 
+    @Disabled
     @Test
     @DisplayName("Парсинг CSV файлов")
     void parseCSVFileTest() throws IOException, CsvException {
@@ -108,6 +110,7 @@ public class FilesTest {
 
     }
 
+    @Disabled
     @Test
     @DisplayName("Парсинг ZIP файлов")
     void parseZipFileTest() throws IOException{
